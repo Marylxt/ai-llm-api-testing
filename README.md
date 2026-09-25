@@ -89,6 +89,14 @@
 ![无状态追踪](screenshots/05_agent_without_state.png)
 ![有状态追踪](screenshots/05_agent_with_state.png)
 
+### 8. LangChain 智能体开发与评估
+- **Agent 开发**：使用 `create_agent` + 本地 Ollama（Qwen2.5）构建智能体，实现自主工具调用
+  - 单步任务：查天气 → 正确调用 `get_weather` 返回结果
+  - 多步任务：搜索 MacBook → 获取 product_id → 加入购物车（自主规划链路）
+- **轨迹评估**：使用 `agentevals` 的 `strict` 模式验证工具调用顺序，`trajectory_strict_match` 结果为 `True`
+- **任务完成度评估**：自研规则评估脚本，检查回答是否包含预期关键词，评分 1.0
+- **代码**：`langchain_agent.py`、`test_agent_trajectory.py`、`deepeval_agent_eval.py`
+
 ## 🎯 测试结论
 1. 本地大模型 API 在长上下文和恶意输入下，响应时间存在指数级恶化。
 2. 缺少输入校验机制，且裸模型缺乏对抗提示词注入的安全护栏。
